@@ -1,0 +1,63 @@
+圳（Zhen）专有软件许可
+
+版权所有 © 2026 Albert Yang。保留所有权利。
+
+圳（英文名称 Zhen，下称“本软件”）是专有、闭源的软件，以官方二进制安装包及可执行文件形式提供，包括 Zhen Desktop、Zhen CLI、App Server，以及由作者拥有权利的相关程序和资源。
+
+本软件可以免费获取和使用。作者授权用户下载、安装和使用本软件的官方发行版本，用于个人学习、软件开发、工作项目、组织内部使用及试用评估。本授权为非独占、不可转让、不可转授权的使用许可，不构成源码许可或开源许可。
+
+未经作者事先书面许可，用户不得：
+
+- 复制并向他人再分发本软件的专有部分，或重新打包、分发修改后的安装包；
+- 修改、改编或制作本软件专有部分的衍生发行版本；
+- 出售、出租、转授权本软件，或将本软件本身作为收费软件、托管 Agent 服务、再分发产品或其他商业化服务提供；
+- 对本软件的专有部分实施逆向工程、反编译、反汇编或试图提取源码，但适用法律允许的行为除外；
+- 删除或更改本软件的版权、许可或署名信息；
+- 使用本软件从事违法、侵权或恶意破坏活动。
+
+用户使用本软件创作的代码、文档及其他成果，不因使用本软件而自动归作者所有。上述商业化限制针对本软件本身，不禁止用户将其合法开发成果用于商业项目。
+
+本软件按“现状”和“可用状态”提供，在适用法律允许的范围内，不提供任何明示或默示担保，包括适销性、特定用途适用性及不侵权担保。作者不保证本软件没有错误、不会中断或符合特定需求。
+
+在适用法律允许的最大范围内，作者不对因使用或无法使用本软件产生的数据丢失、文件损坏、服务中断、第三方模型输出、API 费用、Agent 执行结果或其他损失承担责任；法律规定不得排除的责任不受本条影响。
+
+第三方组件
+
+本软件及其发行包可能包含或单独下载第三方开源组件和运行时，包括 QEMU、SeaBIOS、Nanos、Microsoft HCU、Microsoft MXC 及其他依赖。各第三方组件仅按其自身适用的许可证授权。本许可不得限制、取代或撤销第三方许可证依法赋予接收者的权利，包括适用的源码获取、复制、修改及再分发权利。
+
+本软件自有专有部分与第三方组件应当分别识别。发行包中包含第三方组件，不代表整个本软件成为开源软件；同样，本软件的专有条款不使第三方开源组件变为专有软件。
+
+第三方许可证、版权声明、相应源码提供说明及其他法律材料，以随发行包提供的 THIRD_PARTY_NOTICES 和各组件许可证、SOURCE-OFFER 等文件为准。
+
+---
+
+Zhen Proprietary Software License
+
+Copyright © 2026 Albert Yang. All rights reserved.
+
+Zhen (known as “圳” in Chinese; the “Software”) is proprietary, closed-source software distributed as official binary installers and executables. The Software includes Zhen Desktop, Zhen CLI, the App Server, and related code and resources owned or licensed for proprietary distribution by the author.
+
+The Software is available free of charge. Permission is granted to download, install, and use official releases for personal learning, software development, work projects, internal organizational use, and evaluation. This is a non-exclusive, non-transferable, non-sublicensable license to use the Software. It does not grant access to source code or constitute an open-source license.
+
+Without the author's prior written permission, you may not:
+
+- copy and redistribute the proprietary portions of the Software, or repackage and distribute modified installers;
+- modify, adapt, or publish derivative distributions of the proprietary portions of the Software;
+- sell, rent, lease, or sublicense the Software, or offer the Software itself as paid software, a hosted Agent service, a redistributed product, or another commercialized service;
+- reverse engineer, decompile, disassemble, or attempt to extract the source code of proprietary portions of the Software, except to the extent permitted by applicable law;
+- remove or alter copyright, license, or attribution notices;
+- use the Software for unlawful, infringing, or maliciously destructive activities.
+
+Code, documents, and other outputs lawfully created by users with the Software do not automatically become the author's property. The restrictions on commercialization apply to the Software itself; they do not prohibit the use of users' lawful outputs in commercial projects.
+
+The Software is provided “as is” and “as available,” without warranties of any kind, express or implied, to the extent permitted by applicable law, including warranties of merchantability, fitness for a particular purpose, and non-infringement. The author does not guarantee that the Software is error-free, uninterrupted, or suitable for any particular need.
+
+To the maximum extent permitted by applicable law, the author is not liable for data loss, file corruption, service interruption, third-party model outputs, API charges, Agent actions, or other losses arising from use of or inability to use the Software. Nothing in this paragraph excludes liability that cannot lawfully be excluded.
+
+Third-Party Components
+
+The Software and its distributions may include or separately obtain third-party open-source components and runtimes, including QEMU, SeaBIOS, Nanos, Microsoft HCU, Microsoft MXC, and other dependencies. Each third-party component is licensed under its own applicable terms. This License does not restrict, supersede, or revoke rights granted under those licenses, including applicable rights to obtain source code or to copy, modify, and redistribute covered components.
+
+Proprietary portions of Zhen and third-party components must be distinguished. Including open-source components does not make the entire Software open source; conversely, Zhen's proprietary terms do not convert those components into proprietary software.
+
+For the applicable third-party licenses, copyright notices, source-availability information, and other legal materials, see the THIRD_PARTY_NOTICES files, component license texts, and SOURCE-OFFER materials supplied with the relevant distribution.

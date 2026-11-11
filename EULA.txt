@@ -1,0 +1,85 @@
+圳（Zhen）最终用户许可协议
+
+最后更新：2026-11-12
+
+下载、安装或使用圳（Zhen，下称“本软件”），即表示你同意本协议。若不同意，请不要安装或使用本软件。
+
+1. 软件与授权
+
+圳是免费分发的专有、闭源 Coding + Work AI Agent Harness。作者允许你使用其官方发行版本进行学习、软件开发、个人或组织内部工作以及试用评估。软件本身的复制、修改、再分发、托管和商业化限制，以随包提供的 LICENSE.txt 为准。
+
+2. 使用限制
+
+未经作者事先书面许可，不得再分发或重新打包本软件的专有部分、转售本软件或将其本身作为收费托管服务提供；不得删除作者版权及许可标识。不得在适用法律禁止的范围之外对本软件专有部分实施逆向工程。本协议不限制第三方组件许可证赋予你的权利，也不限制适用法律规定不可放弃的权利。
+
+3. Agent 执行与权限
+
+圳可在用户授权的 Workspace、Target 或桌面环境内读取和修改文件、执行命令或调用工具。你负责决定授权范围、确认重要操作、保护设备和数据，并在使用前备份重要文件。Agent 可能产生不准确的建议、错误代码或非预期操作结果。即使使用了权限控制或沙箱，仍应根据任务的重要程度检查执行结果。
+
+4. 第三方模型与 API 费用
+
+圳不附赠由作者运营的模型 API。模型相关功能依赖你自行配置的第三方模型服务及其 API Key。使用时，必要的对话内容、工具结果、代码或其他上下文可能发送给你选择的模型服务商；启用视觉工具结果时，相关截图也可能发送给该服务商。
+
+你负责选择服务商、保管凭据、了解其服务条款和隐私规则，并承担其收取的 API 费用。当前免费发行版本中，作者不通过圳向用户收取模型调用费用，也不代收或转售第三方模型调用。作者无法控制第三方模型服务的可用性、价格、输出或数据处理方式。
+
+5. 第三方组件
+
+圳可能随包提供或另行下载 QEMU、SeaBIOS、Nanos、Microsoft HCU、Microsoft MXC 等第三方组件。各组件遵守其各自的许可证。第三方开源许可证赋予的源码获取、修改、复制和再分发权利不受本协议限制。具体声明和源码材料见随包的 THIRD_PARTY_NOTICES、licenses 和 SOURCE-OFFER 文件。
+
+6. 数据与反馈
+
+应用的 Session、Workspace 与其他数据可能保存在你的设备上；你授权的远程 Target 会按相应操作处理数据。使用第三方模型 API 时，相关数据可能传给所配置的服务商。详细的数据处理说明应以随发行版本提供的隐私政策为准。
+
+你主动提交的 Issue、日志或截图可能包含路径、代码或其他隐私信息，请在公开分享前自行检查。
+
+7. 无担保与责任限制
+
+本软件按“现状”和“可用状态”提供。适用法律允许的范围内，作者不提供明示或默示担保，也不对因软件或 Agent 操作造成的数据丢失、文件损坏、服务中断、API 支出或其他损失承担责任。法律规定不得排除的责任不受影响。
+
+8. 终止
+
+如你违反本协议，作者可依法终止对本软件专有部分授予的许可。终止后，你应停止使用并删除受该许可约束的副本；第三方组件仍由其自身许可证管辖。
+
+---
+
+Zhen End User License Agreement
+
+Last updated: 2026-11-12
+
+By downloading, installing, or using Zhen (the “Software”), you agree to this agreement. If you do not agree, do not install or use it.
+
+1. Software and license
+
+Zhen is a proprietary, closed-source Coding + Work AI Agent Harness distributed free of charge. The author permits use of official releases for learning, software development, personal or internal organizational work, and evaluation. Restrictions on copying, modifying, redistributing, hosting, or commercializing the Software itself are stated in the accompanying LICENSE.txt.
+
+2. Restrictions
+
+Without the author's prior written permission, you may not redistribute or repackage proprietary portions of the Software, resell the Software, provide the Software itself as a paid hosted service, or remove copyright and license notices. Reverse engineering of proprietary portions is restricted except where permitted by applicable law. This agreement does not limit rights granted by third-party component licenses or non-waivable statutory rights.
+
+3. Agent actions and permissions
+
+Zhen may read or modify files, execute commands, or invoke tools within Workspaces, Targets, or desktop environments you authorize. You are responsible for selecting authorization scopes, reviewing significant actions, safeguarding your devices and data, and backing up important files. Agent suggestions, generated code, and actions may be inaccurate or produce unintended effects. Review consequential results even when permission controls or sandboxing are used.
+
+4. Third-party models and API fees
+
+Zhen does not include a model API operated by the author. Model-dependent features require a third-party model service and API key that you configure. Relevant conversations, tool results, code, or other context may be sent to your selected provider. When vision tool results are enabled, relevant screenshots may also be sent to that provider.
+
+You are responsible for selecting the provider, protecting credentials, reviewing its terms and privacy practices, and paying its API fees. In the current free release, the author does not charge model-usage fees through Zhen and does not broker or resell third-party model calls. The author does not control third-party model availability, pricing, output, or data processing.
+
+5. Third-party components
+
+Zhen may bundle or separately obtain components including QEMU, SeaBIOS, Nanos, Microsoft HCU, and Microsoft MXC. Each component remains subject to its own license. Rights granted by third-party open-source licenses, including applicable source, modification, copying, and redistribution rights, are unaffected by this agreement. See the accompanying THIRD_PARTY_NOTICES, licenses, and SOURCE-OFFER materials.
+
+6. Data and feedback
+
+Sessions, Workspaces, and other app data may be stored on your device; authorized remote Targets process data according to the actions performed. Data relevant to model requests may be sent to your configured provider. The privacy policy supplied with each release should describe the applicable data handling in more detail.
+
+Issues, logs, or screenshots that you voluntarily submit may contain file paths, code, or other private information. Review them before posting publicly.
+
+7. No warranty and limitation of liability
+
+The Software is provided “as is” and “as available.” To the extent permitted by applicable law, the author disclaims express and implied warranties and is not liable for data loss, file corruption, service disruption, API charges, or other losses arising from the Software or Agent actions. Nothing here excludes liability that cannot lawfully be excluded.
+
+8. Termination
+
+If you breach this agreement, the author may terminate the license granted to proprietary portions of the Software, as permitted by law. Upon termination, stop using and remove copies subject to that license. Third-party components remain governed by their own licenses.
