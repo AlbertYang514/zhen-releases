@@ -2,6 +2,9 @@
 
 **本地优先的 Agent 执行环境 / A local-first agent execution environment**
 
+> 安装或启动遇到问题，请先看文末的「常见问题 / FAQ」。
+> If installation or launch fails, read the FAQ at the bottom first.
+
 > 下载 0.1.0-beta.1 / Download 0.1.0-beta.1:
 > https://github.com/AlbertYang514/zhen-releases/releases/tag/v0.1.0-beta.1
 >
@@ -9,6 +12,67 @@
 > https://albert.gd.cn/zhen
 >
 > 本仓库只发布二进制、Runtime 和第三方源码。Zhen Harness 的源代码仓库不公开。
+
+---
+
+## 常见问题（中文）
+
+### 1. macOS 提示「已损坏，无法打开」或「无法验证开发者」
+
+这是未签名应用的隔离属性，不是文件损坏。执行：
+
+```bash
+sudo xattr -dr com.apple.quarantine "/Applications/Zhen Harness.app"
+```
+
+然后右键 App → 打开。只需要做一次。
+
+### 2. Windows 被 SmartScreen 或 Defender 拦截
+
+SmartScreen：
+
+```text
+更多信息 → 仍要运行
+```
+
+解除单个文件的锁定：
+
+```powershell
+Unblock-File .\Zhen.Harness_0.1.0-beta.1_x64-setup.exe
+```
+
+或在文件属性里勾选「解除锁定」。
+
+如果 Defender 直接报毒并隔离：Beta 没有代码签名，常见误报。请在
+「Windows 安全中心 → 病毒和威胁防护 → 保护历史记录」中还原，并把安装包或
+安装目录加入排除项。
+
+### 3. Windows 为什么一定要管理员权限
+
+Runner、HMAC key 和 SSH key 的 ACL 只允许 SYSTEM 与 Administrators 读取。
+普通权限下 Verify 会失败并保持 fail-closed，不会降级到普通 shell。
+
+### 4. Linux 安装或启动失败
+
+系统要求：Ubuntu 24.04 / glibc ≥ 2.38。Ubuntu 22.04 不支持。
+
+```bash
+sudo apt update
+sudo apt install "./Zhen Harness_0.1.0-beta.1_amd64.deb"
+```
+
+如果缺少 WebKit 运行时：
+
+```bash
+sudo apt install libwebkit2gtk-4.1-0
+```
+
+Linux 版不包含 HCU（桌面操作）能力。
+
+### 5. 其他问题
+
+见 [Release Notes](https://github.com/AlbertYang514/zhen-releases/releases/tag/v0.1.0-beta.1)
+里的已知问题列表。
 
 ---
 
@@ -385,3 +449,65 @@ The Beta is unsigned:
 
 - macOS: right-click → Open, or allow it in Privacy & Security
 - Windows: SmartScreen → More info → Run anyway
+
+---
+
+## FAQ (English)
+
+### 1. macOS says the app is damaged or cannot be verified
+
+That is the quarantine attribute on an unsigned app, not a broken download:
+
+```bash
+sudo xattr -dr com.apple.quarantine "/Applications/Zhen Harness.app"
+```
+
+Then right-click the app and choose Open. This is only needed once.
+
+### 2. Windows SmartScreen or Defender blocks the installer
+
+SmartScreen:
+
+```text
+More info → Run anyway
+```
+
+Unblock a single file:
+
+```powershell
+Unblock-File .\Zhen.Harness_0.1.0-beta.1_x64-setup.exe
+```
+
+Or tick "Unblock" in the file properties.
+
+If Defender quarantines it: the Beta is unsigned, so false positives are common.
+Restore it from "Windows Security → Virus & threat protection → Protection history"
+and add the installer or install directory as an exclusion.
+
+### 3. Why does Windows need administrator rights
+
+The Runner, HMAC key and SSH keys are ACL-restricted to SYSTEM and Administrators.
+Without elevation Verify fails and execution stays fail-closed; there is no fallback
+to a plain shell.
+
+### 4. Linux install or launch fails
+
+Requires Ubuntu 24.04 / glibc ≥ 2.38. Ubuntu 22.04 is not supported.
+
+```bash
+sudo apt update
+sudo apt install "./Zhen Harness_0.1.0-beta.1_amd64.deb"
+```
+
+If the WebKit runtime is missing:
+
+```bash
+sudo apt install libwebkit2gtk-4.1-0
+```
+
+The Linux build does not include HCU (desktop operation).
+
+### 5. Anything else
+
+See the known issues in the
+[Release Notes](https://github.com/AlbertYang514/zhen-releases/releases/tag/v0.1.0-beta.1).
