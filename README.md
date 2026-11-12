@@ -1,143 +1,387 @@
-# 圳（Zhen）
+# Zhen Harness
 
-[简体中文](#简体中文) · [English](#english)
+**本地优先的 Agent 执行环境 / A local-first agent execution environment**
 
-[官方发行页 / Official Releases](https://github.com/AlbertYang514/zhen-releases/releases) · [反馈 / Feedback](https://github.com/AlbertYang514/zhen-releases/issues)
-
-## 简体中文
-
-圳（Zhen Harness）是一个本地优先的 Coding + Work AI Agent Harness 项目，目标是让用户在自己选择的模型服务与授权范围内使用 Agent 完成编程和日常工作。模型 API 由用户自行配置（BYOK）；圳不提供作者运营的模型 API。
-
-项目规划包含命令行（CLI）与桌面端（Desktop）。CLI 当前以 `zhen` 为命令名。**本仓库目前还没有公开的、经过验收的安装包或二进制 Release；桌面安装包和 CLI 下载暂不可用。**请关注上方官方发行页，不要从非官方镜像获取所谓安装包。
-
-### 客户端与平台状态
-
-首版 Beta 的计划打包目标如下，均不代表已发布或完成平台验收：
-
-| 客户端 / 目标平台 | 状态 |
-| --- | --- |
-| CLI：macOS Apple Silicon（arm64） | 计划目标；尚无公开验收构建 |
-| CLI：Windows（x64） | 计划目标；尚无公开验收构建 |
-| CLI：Linux（x86_64） | 计划目标；尚无公开验收构建 |
-| Desktop：macOS Apple Silicon / Windows x64 / Linux x86_64 | 计划中的客户端；本仓库尚无可下载安装包，也未在此声明平台验收 |
-
-### 安装与首次配置
-
-当前没有可供安装的官方二进制包。**不要按下面的配置示例推断已经有可下载 CLI。**当官方 Release 发布验收过的客户端后，请从该 Release 选择对应的 CLI 或 Desktop 资产；Runtime Bundle 是执行运行时资源，不是 Desktop 安装器。
-
-首版 CLI 的配置流程设计为使用 `zhen config init` 生成配置模板，再把 API Key 放入模板指定的环境变量。当前 CLI 使用 OpenAI-compatible Chat Completions 接口。拿到官方 CLI 后，先运行 `zhen --help` 查看该构建支持的命令。
-
-配置格式示例（占位值，不含真实凭据）：
-
-```toml
-[model]
-provider = "openai-compatible"
-base_url = "https://your-endpoint.example/v1"
-model = "your-model-id"
-api_key_env = "ZHEN_API_KEY"
-request_timeout_seconds = 90
-```
-
-将 `ZHEN_API_KEY` 设置在启动圳的当前终端环境中。不要把真实 API Key 写入配置文件、提交到仓库或贴到公开 Issue。服务商的数据处理、可用性、价格和 API 费用由你选择的服务商决定；相关请求内容会发送给该服务商。
-
-### Session、Workspace 与 Target
-
-- **Session** 是一次 Agent 对话及其授权上下文。权限应按任务单独检查；撤销授权后，不应继续依赖旧授权。
-- **Workspace** 是你希望 Agent 处理的项目目录或工作范围。文件访问应由用户明确授予范围。
-- **Target** 是命令执行目标。Target 与本机 Host 是不同边界；只有当前构建为该平台提供并验证了执行后端时，才可使用 Target 执行。没有可用、可信的后端时，执行应保持关闭，不回退到 Host Shell。
-
-部分 Target 设计使用 Nanos Guest、QEMU 与 SSH，将 Agent 命令送到单独的执行环境。其可用平台、运行时下载、隔离边界和验收状态会随具体 Beta 构建说明；本仓库目前没有已发布 Runtime Bundle，也不宣称所有平台均已完成隔离验收。运行前应检查将要授权的 Workspace、Target 和命令。
-
-### Computer Use
-
-Computer Use 是可选的实验方向，当前任务书指定的 HCU 集成目标为 macOS 与 Windows；Linux 不支持。此能力不代表已经随本仓库中的可下载构建提供，也不代表端到端验收完成。图片附件或文件上传功能尚未在此确认实现。启用视觉功能时，相关截图或上下文可能发送给你配置的模型服务商。
-
-### Beta 限制
-
-- 本仓库尚无公开 Release 资产；安装包、CLI、Desktop 和 Runtime Bundle 均未在此发布。
-- macOS arm64、Windows x64 与 Linux x86_64 是计划打包目标，不是平台验收声明。
-- Target、隔离运行时和 Computer Use 按平台及构建逐项开放；实验路径可能关闭或不完整。
-- 向模型服务发送的内容、Agent 生成结果和命令效果都需要由用户审阅。重要文件请先备份。
-- 不要向公开反馈渠道提交 API Key、敏感代码、私密日志或个人信息。
-
-### 下载、反馈与许可证
-
-- 下载：请留意[官方 GitHub Releases](https://github.com/AlbertYang514/zhen-releases/releases)。当前没有可下载资产。
-- 反馈：通过[公开 Issues](https://github.com/AlbertYang514/zhen-releases/issues) 提交问题或建议。公开提交前请移除凭据、隐私数据和无权披露的内容。
-- [LICENSE.txt](LICENSE.txt)：圳自有专有软件许可；版权归 Albert Yang，© 2026。
-- [EULA.txt](EULA.txt)：中英双语最终用户许可协议。
-- [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)：已知第三方组件、来源与待核验事项。
-- [SOURCES.md](SOURCES.md)：GPL 源码及构建材料的发行状态与交付要求。
-- [RELEASE_CHECKLIST.md](RELEASE_CHECKLIST.md)：Beta 发布前核对清单。
-
-圳自有软件仍按专有许可证授权。GPL/LGPL 或其他第三方许可证只适用于其覆盖的具体组件，相关权利不因圳的专有条款而改变。公开第三方源码不表示圳的 Core、CLI、Desktop、App Server 或其他自有实现开放源码。
+> 下载 0.1.0-beta.1 / Download 0.1.0-beta.1:
+> https://github.com/AlbertYang514/zhen-releases/releases/tag/v0.1.0-beta.1
+>
+> 官网 / Official website:
+> https://albert.gd.cn/zhen
+>
+> 本仓库只发布二进制、Runtime 和第三方源码。Zhen Harness 的源代码仓库不公开。
 
 ---
 
-## English
+# 中文
 
-Zhen (Zhen Harness) is a local-first Coding + Work AI Agent Harness project. It is designed to let users work with an Agent within the model service and permissions they choose. Users bring their own model API (BYOK); Zhen does not include a model API operated by the author.
+## 这是什么
 
-The project plans to provide a command-line interface (CLI) and a desktop client. The CLI command is `zhen`. **This repository currently has no public, verified binary release or installer. CLI downloads and desktop installers are not available yet.** Check the official releases page above; do not obtain purported installers from unofficial mirrors.
+Zhen Harness 是一个本地优先的桌面 Agent 执行环境。它把“模型”和“实际执行”分开：
 
-### Clients and platform status
+- **Workspace**：你本机上的一个真实目录
+- **Target**：执行位置，可以是本机，也可以是一台远程机器
+- **Runner / Sandbox**：真正运行命令的受信任执行链
 
-The following are planned packaging targets for the first Beta. They are not claims that builds have shipped or passed platform acceptance:
+模型只负责生成意图，命令由 Target 上的受保护 Runner 执行。Zhen 不会因为模型输出就静默提升权限；所有执行都必须先完成 Setup 和 Verify。
 
-| Client / target platform | Status |
-| --- | --- |
-| CLI: macOS Apple Silicon (arm64) | Planned; no public verified build |
-| CLI: Windows (x64) | Planned; no public verified build |
-| CLI: Linux (x86_64) | Planned; no public verified build |
-| Desktop: macOS Apple Silicon / Windows x64 / Linux x86_64 | Planned clients; no downloadable installer or platform acceptance is claimed here |
+## 当前版本
 
-### Installation and first configuration
+**0.1.0-beta.1**
 
-There is no official binary available to install yet. **The configuration example below does not imply that a CLI download is available.** When a verified client is published, select the matching CLI or Desktop asset from that release. A Runtime Bundle contains execution runtime resources; it is not a Desktop installer.
+| 平台 | 文件 | 要求 |
+| --- | --- | --- |
+| macOS | `Zhen Harness_0.1.0-beta.1_aarch64.dmg` | macOS 11+，Apple Silicon |
+| Windows | `Zhen Harness_0.1.0-beta.1_x64-setup.exe` | Windows 10/11 x64，**需要管理员权限** |
+| Linux | `Zhen Harness_0.1.0-beta.1_amd64.deb` | glibc ≥ 2.38（Ubuntu 24.04） |
 
-The planned first-run CLI flow uses `zhen config init` to create a configuration template, with the API key stored in the environment variable named by the template. The current CLI implementation targets OpenAI-compatible Chat Completions. Once you have an official CLI build, run `zhen --help` to see the commands supported by that build.
+## 安装
 
-Example configuration (placeholders only; no real credentials):
+```bash
+# macOS
+open "Zhen Harness_0.1.0-beta.1_aarch64.dmg"
+# 把 App 拖进 Applications；首次打开请右键 → 打开
 
-```toml
-[model]
-provider = "openai-compatible"
-base_url = "https://your-endpoint.example/v1"
-model = "your-model-id"
-api_key_env = "ZHEN_API_KEY"
-request_timeout_seconds = 90
+# Linux
+sudo apt install "./Zhen Harness_0.1.0-beta.1_amd64.deb"
+
+# Windows
+# 双击安装包，允许 UAC。应用每次启动都会请求管理员权限
 ```
 
-Set `ZHEN_API_KEY` in the environment used to launch Zhen. Do not put a real API key in the config file, commit it to a repository, or post it in a public issue. The provider you choose controls data handling, availability, pricing, and API charges. Request content is sent to that provider.
+命令行（可选）：
 
-### Session, Workspace, and Target
+```text
+zhen-cli-macos-aarch64
+zhen-cli-windows-x86_64.exe
+zhen-cli-linux-x86_64
+```
 
-- A **Session** is an Agent conversation and its authorization context. Review permissions for each task and do not rely on stale grants after revocation.
-- A **Workspace** is the project directory or work scope you want the Agent to handle. File access should be explicitly granted by the user.
-- A **Target** is a command-execution destination. A Target is a separate boundary from the local Host. Target execution is available only when the specific build provides a verified backend for that platform. Without a usable, trusted backend, execution should remain disabled and must not fall back to a Host shell.
+## 安装包里有什么
 
-Some Target designs use a Nanos Guest, QEMU, and SSH to route Agent commands into a separate execution environment. Availability by platform, runtime downloads, isolation boundaries, and acceptance status will be documented for each Beta build. This repository currently has no published Runtime Bundle and does not claim that isolation has been accepted on every platform. Review the Workspace, Target, and commands being authorized.
+- QEMU 11.1.3（aarch64 / x86_64）
+- Nanos Guest 与源码构建 Kernel
+- 五个 Remote Bootstrap（Linux x86_64/arm64、macOS x86_64/arm64、Windows x64）
+- Microsoft MXC 1.0.1 运行时（三端都带，连接 Windows Target 时需要）
+- Microsoft HCU v1.0.0（macOS / Windows；Linux 不包含）
+- 完整第三方许可证与来源记录
 
-### Computer Use
+## 许可证与对应源码
 
-Computer Use is an optional experimental direction. The HCU integration targets specified for this task are macOS and Windows; Linux is unsupported. This does not mean the feature is included in a downloadable build here or has completed end-to-end acceptance. Image attachments and file uploads are not confirmed as implemented. When vision features are enabled, relevant screenshots or context may be sent to your configured model provider.
+Zhen Harness 自有部分是专有软件。第三方组件按各自许可证分发，许可证文本随安装包提供：
 
-### Beta limitations
+```text
+macOS / Linux Runtime:  share/licenses/
+Desktop 安装包:          resources/licenses/
+```
 
-- There are no public Release assets in this repository; installers, CLI, Desktop, and Runtime Bundles have not been published here.
-- macOS arm64, Windows x64, and Linux x86_64 are planned packaging targets, not platform acceptance claims.
-- Target execution, runtime isolation, and Computer Use are enabled separately by platform and build; experimental paths may be unavailable or incomplete.
-- Users should review model outputs and Agent command effects. Back up important files before use.
-- Do not post API keys, sensitive code, private logs, or personal information in public feedback channels.
+GPL / LGPL 对应源码与本版本同 tag 发布：
 
-### Downloads, feedback, and license
+- `qemu-11.1.3.tar.xz`
+- `seabios-b52ca86….tar.gz`
+- `zhen-qemu-build-material-11.1.3.tar.gz`
+- 14 个 LGPL 库源码包（glib、util-linux、gmp、gnutls、nettle、libidn2、libunistring、libtasn1、gettext、libiconv、libssh、libusb）
 
-- Downloads: watch [official GitHub Releases](https://github.com/AlbertYang514/zhen-releases/releases). No downloadable assets are available yet.
-- Feedback: report issues or suggestions in [public Issues](https://github.com/AlbertYang514/zhen-releases/issues). Remove credentials, private data, and material you are not authorized to disclose before posting.
-- [LICENSE.txt](LICENSE.txt): proprietary license for Zhen-owned software; Copyright © 2026 Albert Yang.
-- [EULA.txt](EULA.txt): bilingual End User License Agreement.
-- [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md): known third-party components, sources, and items requiring verification.
-- [SOURCES.md](SOURCES.md): GPL source and build-material release status and delivery requirements.
-- [RELEASE_CHECKLIST.md](RELEASE_CHECKLIST.md): pre-Beta release checklist.
+映射关系见 `THIRD-PARTY-SOURCES.md`。动态库以独立文件分发，用户可以替换。
 
-Zhen-owned software remains proprietary. GPL/LGPL and other third-party licenses apply only to the components they cover, and their rights are not changed by Zhen's proprietary terms. Publishing third-party source does not open-source Zhen's Core, CLI, Desktop, App Server, or other proprietary implementation.
+## 校验
+
+```bash
+sha256sum -c SHA256SUMS
+```
+
+```text
+DMG  28bd167aaf9c68e0134c1043ffece947a92b995f71c9194640df199a0f4c3780
+DEB  344b3c2e054d760027305e02c00b4b01fcb3cc52c0ffe5215d6602e084c0dffb
+EXE  fa459daaee10af03aa0d82339adf1e58b73f3bc48a2b93711d60b084c16f6996
+```
+
+---
+
+## 常见问题（中文）
+
+### 1. 为什么 Setup 完成后，某些会话里还是不能执行？
+
+Setup 和 Verify 是**机器级**状态；执行能力是**会话级**授权。
+
+- 已经开始的会话不会自动获得新 Target 或新权限
+- 新加 Workspace、新注册 Target 后，请**新建一个会话**
+- 如果某个会话被 revoke 过，它不会自动恢复，需要重新授权
+
+### 2. 为什么在某个会话之后，Workspace 不能热添加？
+
+当前设计里，会话在创建时绑定 Target 和权限位。运行中的会话不会热加载新的 Workspace，这是有意的 fail-closed 行为。请结束当前会话后新建。
+
+### 3. Windows 上会弹出终端窗口吗？
+
+旧版本会在执行、验证、修改权限时弹出 PowerShell/控制台窗口。0.1.0-beta.1 已统一使用 `CREATE_NO_WINDOW`，正常路径不再弹窗。
+
+如果仍然出现：
+
+- 确认安装的是本页 `0.1.0-beta.1` 安装包
+- 某些第三方程序（例如自带的 OpenSSH 工具）可能仍会短暂闪窗
+- 把具体操作路径反馈给我们
+
+### 4. 为什么 Windows 版必须用管理员权限运行？
+
+Windows Target 的 Runner、HMAC key、SSH key 的 ACL 只允许 `SYSTEM` 和 `Administrators` 读取。普通权限进程读不到这些受保护证据，Verify 会失败，执行链会 fail-closed，不会降级到普通 shell。
+
+因此：
+
+- 应用启动时会请求 UAC
+- 拒绝 UAC 后执行功能不可用，这是预期行为
+
+### 5. Linux 执行为什么偶尔很慢？
+
+已知问题。表现为：
+
+- 大多数命令很快
+- 偶尔一次执行会卡住一段时间
+- 极端情况下出现“几乎瞬时完成但结果不完整”的情况
+
+这**不影响 macOS → Linux Target** 的路径。我们仍在定位，属于 Beta 已知问题，不是权限或沙箱绕过。
+
+### 6. Windows 验证为什么偶尔要十几秒？
+
+Verify 会做以下检查，其中部分调用 Windows 计划任务和 CIM 接口，单次约 0.5–1 秒：
+
+- Runner / config / HMAC key 的哈希
+- sshd 配置、Host Key、authorized_keys 绑定
+- 计划任务身份与交互会话
+- Runner 进程所有者 SID
+
+累计 10–15 秒属于当前实现的正常范围，不是卡死。
+
+### 7. macOS 版本稳定吗？
+
+三平台里 macOS 是测试最充分的，相对最稳定。已知问题主要在 Linux 执行延迟和 Windows 的权限/计划任务路径。
+
+### 8. HCU 为什么会抢鼠标键盘？
+
+HCU（Computer Use）通过真实桌面输入工作。它运行时：
+
+- 会移动鼠标、发送键盘事件
+- 可能抢占当前前台窗口
+
+建议：
+
+- 运行 HCU 时不要同时操作鼠标键盘
+- 用完停止 HCU 会话
+- 需要并行工作时，用另一台机器或另一个桌面会话
+
+### 9. 为什么我的 Workspace 被拒绝，说包含硬链接？
+
+这是一个 fail-closed 检查：ACL 是路径权限，硬链接会让同一 inode 出现在 Workspace 之外的路径上。
+
+检查：
+
+```bash
+find /path/to/workspace -xdev -type f -links +1 | head
+```
+
+解决办法：换一个普通项目目录，或先移除硬链接。NVM、缓存目录、复制来的 `node_modules`、备份目录是常见来源。
+
+### 10. 注册远程 Ubuntu 时提示缺少 Bootstrap？
+
+安装包的 `resources/bin` 必须包含五个 Bootstrap。0.1.0-beta.1 已包含全部五个：
+
+```text
+zhen-bootstrap-linux-aarch64
+zhen-bootstrap-linux-x86_64
+zhen-bootstrap-macos-aarch64
+zhen-bootstrap-macos-x86_64
+zhen-bootstrap-windows-x86_64.exe
+```
+
+如果仍报错，请确认没有被旧版本覆盖，并检查安装目录。
+
+### 11. 连接 Windows Target 为什么需要 MXC？
+
+MXC 是 Windows 侧的进程容器运行时。Host 会把 MXC payload 安装到 Windows Target，因此**三端安装包都带 MXC**，包括 macOS 和 Linux。
+
+### 12. 安装包为什么会被系统拦截？
+
+Beta 没有代码签名：
+
+- macOS：右键 → 打开，或在“隐私与安全性”里允许
+- Windows：SmartScreen → 更多信息 → 仍要运行
+
+---
+
+# English
+
+## What this is
+
+Zhen Harness is a local-first desktop agent execution environment. It separates model output from real execution:
+
+- **Workspace**: a real directory on your machine
+- **Target**: where commands run, locally or on a remote machine
+- **Runner / Sandbox**: the trusted execution chain
+
+The model produces intent; commands run through a protected Runner on the Target. Nothing is silently escalated, and execution is available only after Setup and Verify succeed.
+
+## Current release
+
+**0.1.0-beta.1**
+
+| Platform | File | Requirements |
+| --- | --- | --- |
+| macOS | `Zhen Harness_0.1.0-beta.1_aarch64.dmg` | macOS 11+, Apple Silicon |
+| Windows | `Zhen Harness_0.1.0-beta.1_x64-setup.exe` | Windows 10/11 x64, **administrator required** |
+| Linux | `Zhen Harness_0.1.0-beta.1_amd64.deb` | glibc ≥ 2.38 (Ubuntu 24.04) |
+
+## Install
+
+```bash
+# macOS
+open "Zhen Harness_0.1.0-beta.1_aarch64.dmg"   # drag to Applications, right-click → Open
+
+# Linux
+sudo apt install "./Zhen Harness_0.1.0-beta.1_amd64.deb"
+
+# Windows
+# Run the installer and accept the UAC prompt. The app requests elevation on every launch.
+```
+
+Optional CLIs: `zhen-cli-macos-aarch64`, `zhen-cli-windows-x86_64.exe`, `zhen-cli-linux-x86_64`.
+
+## What is bundled
+
+- QEMU 11.1.3 system emulators (aarch64 / x86_64)
+- Nanos Guest and a source-built kernel
+- Five remote Bootstraps (Linux x86_64/arm64, macOS x86_64/arm64, Windows x64)
+- Microsoft MXC 1.0.1 runtime (all platforms, required for Windows Targets)
+- Microsoft HCU v1.0.0 (macOS / Windows only)
+- Complete third-party licenses and provenance
+
+## Licensing and corresponding source
+
+Zhen Harness itself is proprietary. Third-party components ship under their own terms.
+License material is inside every package:
+
+```text
+Runtime: share/licenses/
+Desktop: resources/licenses/
+```
+
+Corresponding source is published under the same tag:
+
+- `qemu-11.1.3.tar.xz`
+- `seabios-b52ca86….tar.gz`
+- `zhen-qemu-build-material-11.1.3.tar.gz`
+- 14 LGPL library source archives (glib, util-linux, gmp, gnutls, nettle, libidn2, libunistring, libtasn1, gettext, libiconv, libssh, libusb)
+
+See `THIRD-PARTY-SOURCES.md` for the exact mapping. Dynamic libraries are shipped as
+separate files and can be replaced.
+
+## Verify
+
+```bash
+sha256sum -c SHA256SUMS
+```
+
+```text
+DMG  28bd167aaf9c68e0134c1043ffece947a92b995f71c9194640df199a0f4c3780
+DEB  344b3c2e054d760027305e02c00b4b01fcb3cc52c0ffe5215d6602e084c0dffb
+EXE  fa459daaee10af03aa0d82339adf1e58b73f3bc48a2b93711d60b084c16f6996
+```
+
+---
+
+## FAQ (English)
+
+### 1. Setup succeeded, but execution is still disabled in my session
+
+Setup and Verify are machine-level. Execution permission is per-session.
+
+- Existing sessions do not gain new Targets or new capabilities
+- After adding a Workspace or Target, start a new session
+- A revoked session stays revoked until re-authorized
+
+### 2. Why can't I hot-add a Workspace after a session starts?
+
+Sessions bind their Target and permission tier at creation. Running sessions do not
+reload new Workspaces. This is intentional fail-closed behavior; start a new session.
+
+### 3. Does Windows still flash terminal windows?
+
+Older builds spawned PowerShell and console processes during execution, verification and
+ACL changes. 0.1.0-beta.1 sets `CREATE_NO_WINDOW` on every first-party child process.
+
+If you still see a window:
+
+- confirm you installed this build
+- some third-party tools (for example bundled OpenSSH binaries) may still flash briefly
+- report the exact action you performed
+
+### 4. Why does Windows require administrator rights?
+
+The Windows Target stores its Runner, HMAC key and SSH keys with an ACL that only
+`SYSTEM` and `Administrators` can read. A normal token cannot read that evidence, so
+Verify would fail and execution stays fail-closed. There is no fallback to a plain
+user shell.
+
+The app therefore requests elevation at launch. Declining UAC disables execution by design.
+
+### 5. Why is Linux execution occasionally slow?
+
+Known issue:
+
+- most commands are fast
+- occasionally a run stalls for a while
+- in rare cases a run reports completion almost instantly with incomplete results
+
+This does not affect macOS → Linux Target. It is a Beta issue under investigation, not a
+sandbox or permission bypass.
+
+### 6. Why does Windows Verify sometimes take 10–15 seconds?
+
+Verify hashes the Runner, config and HMAC key, checks the sshd layout and key binding,
+inspects the scheduled task identity and session, and resolves each Runner process owner
+SID. Some of those Windows calls take 0.5–1 second each, so 10–15 seconds is normal for
+this implementation.
+
+### 7. Is macOS more stable?
+
+macOS is the most exercised platform in this Beta. The known rough edges are Linux
+execution latency and the Windows elevation/scheduled-task path.
+
+### 8. Why does HCU take over my mouse and keyboard?
+
+HCU drives the real desktop. While it runs it moves the pointer and sends keyboard
+events, and it may raise its own window.
+
+Recommendations:
+
+- do not use the mouse or keyboard while HCU runs
+- stop the HCU session when finished
+- use another machine or desktop session for parallel work
+
+### 9. My Workspace is refused because it contains hard links
+
+This is a deliberate fail-closed check: an ACL grant is path-based, but a hard link is a
+second name for the same inode, so the grant could expose the file through a path outside
+the Workspace.
+
+```bash
+find /path/to/workspace -xdev -type f -links +1 | head
+```
+
+Choose a normal project directory, or remove the hard links first. NVM, caches, copied
+`node_modules` and backup trees are common sources.
+
+### 10. Adding a remote Ubuntu machine says a Bootstrap is missing
+
+`resources/bin` must contain all five Bootstrap artifacts. 0.1.0-beta.1 includes them.
+If the error persists, verify that an older install did not overwrite the directory.
+
+### 11. Why does connecting to a Windows Target need MXC?
+
+MXC is the Windows process-container runtime. The Host installs the MXC payload on the
+Windows Target, so every platform package ships it, including macOS and Linux.
+
+### 12. Why does the OS block the installer?
+
+The Beta is unsigned:
+
+- macOS: right-click → Open, or allow it in Privacy & Security
+- Windows: SmartScreen → More info → Run anyway
